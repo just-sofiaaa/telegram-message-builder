@@ -1,0 +1,6 @@
+# venv if the project
+/.venv/
+
+# cache, python bytecode
+__pycache__/
+*.pyc
