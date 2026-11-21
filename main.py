@@ -10,10 +10,33 @@ def main(page: ft.Page) -> None:
     page.window.max_width = 1440
     page.window.max_height = 1040
 
+    def create_document(event: ft.Event[ft.IconButton]) -> None:
+        workspace.content = ft.Column(
+            controls=[
+                ft.Text(
+                    "New document",
+                    color=ft.Colors.ON_SURFACE_VARIANT
+                )
+            ]
+        )
+
     control_panel = ft.Container(
-        content=ft.Text(
-            "Control panel",
-            color=ft.Colors.ON_SURFACE_VARIANT
+        content=ft.Row(
+            controls=[
+                ft.IconButton(
+                    icon=ft.Icons.CREATE_ROUNDED,
+                    tooltip="Create new document",
+                    style=ft.ButtonStyle(
+                        bgcolor={
+                            ft.ControlState.DEFAULT: ft.Colors.GREEN_200,
+                            ft.ControlState.HOVERED: ft.Colors.GREEN_300
+                        },
+                        shape=ft.RoundedRectangleBorder(radius=8),
+                        mouse_cursor=ft.MouseCursor.CLICK
+                    ),
+                    on_click=create_document
+                )
+            ]
         ),
         padding=12,
         bgcolor=ft.Colors.SURFACE_CONTAINER,
