@@ -5,6 +5,11 @@ def main(page: ft.Page) -> None:
     page.theme_mode = ft.ThemeMode.LIGHT
     page.theme = ft.Theme(color_scheme_seed=ft.Colors.GREEN)
 
+    page.window.min_width = 640
+    page.window.min_height = 440
+    page.window.max_width = 1440
+    page.window.max_height = 1040
+
     message = ft.Text("[MESSAGE] Application started!")
     page.add(message)
 
