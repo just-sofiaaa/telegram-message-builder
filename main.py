@@ -10,10 +10,34 @@ def main(page: ft.Page) -> None:
     page.window.max_width = 1440
     page.window.max_height = 1040
 
-    message = ft.Text("[MESSAGE] Application started!")
-    page.add(message)
+    control_panel = ft.Container(
+        content=ft.Text(
+            "Control panel",
+            color=ft.Colors.ON_SURFACE_VARIANT
+        ),
+        padding=12,
+        bgcolor=ft.Colors.SURFACE_CONTAINER,
+        border_radius=8
+    )
 
-    another_message = ft.Text("[MESSAGE] All works well!")
-    page.add(another_message)
+    workspace = ft.Container(
+        content=ft.Text(
+            "No open document",
+            color=ft.Colors.ON_SURFACE_VARIANT
+        ),
+        padding=12,
+        bgcolor=ft.Colors.SURFACE_CONTAINER,
+        border_radius=8,
+        expand=True
+    )
+
+    layout = ft.Column(
+        controls=[control_panel, workspace],
+        spacing=8,
+        horizontal_alignment=ft.CrossAxisAlignment.STRETCH,
+        expand=True
+    )
+
+    page.add(layout)
 
 ft.run(main)
