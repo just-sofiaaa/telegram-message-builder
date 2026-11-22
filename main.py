@@ -25,11 +25,14 @@ def main(page: ft.Page) -> None:
             label_small=uniform_style
         )
     )
+    page.theme.hover_color = ft.Colors.TRANSPARENT
 
     page.window.min_width = 640
     page.window.min_height = 440
     page.window.max_width = 1440
     page.window.max_height = 1040
+
+    ###
 
     def create_document(event: ft.Event[ft.IconButton]) -> None:
         document_title = ft.Text(
@@ -37,35 +40,67 @@ def main(page: ft.Page) -> None:
             color=ft.Colors.ON_SURFACE_VARIANT,
         )
 
-        def on_endpoint_change(event: ft.Event[ft.TextField]) -> None:
-            endpoint_name = event.control.value.strip()
-            document_title.value = endpoint_name or "New document"
+        def on_message_name_change(inner_event: ft.Event[ft.TextField]) -> None:
+            message_name = inner_event.control.value.strip()
+            document_title.value = message_name or "New document"
 
-        endpoint_field = ft.TextField(
+        message_name_field = ft.TextField(
             label="Message name",
+            label_style=ft.TextStyle(color=ft.Colors.ON_SURFACE_VARIANT),
             color=ft.Colors.ON_SURFACE_VARIANT,
 
-            bgcolor=ft.Colors.SURFACE,
-            hover_color=ft.Colors.SURFACE,
+            filled=True,
+            fill_color=ft.Colors.SURFACE,
 
             border_radius=8,
-            border_color=ft.Colors.PRIMARY,
+            border_color=ft.Colors.ON_SURFACE_VARIANT,
             border_width=1,
-            focused_border_width=2,
 
-            expand=True,
+            width=600,
 
-            on_change=on_endpoint_change
+            mouse_cursor=ft.MouseCursor.CLICK,
+            on_change=on_message_name_change
+        )
+
+        message_type_field = ft.Dropdown(
+            label="Message type",
+            label_style=ft.TextStyle(color=ft.Colors.ON_SURFACE_VARIANT),
+            color=ft.Colors.ON_SURFACE_VARIANT,
+
+            filled=True,
+            fill_color=ft.Colors.SURFACE,
+            bgcolor=ft.Colors.SURFACE,
+
+            border_radius=8,
+            border_color=ft.Colors.ON_SURFACE_VARIANT,
+            border_width=1,
+
+            width=600,
+
+            options=[
+                ft.DropdownOption(key="standard_message", text="Standard message"),
+                ft.DropdownOption(key="rich_message", text="Rich message")
+            ],
+            menu_style=ft.MenuStyle(
+                bgcolor=ft.Colors.SURFACE,
+                max_size=ft.Size.from_width(200),
+                shape=ft.RoundedRectangleBorder(radius=12),
+                elevation=3
+            )
         )
 
         workspace.content = ft.Column(
             controls=[
                 document_title,
                 ft.Divider(),
-                endpoint_field
+                message_name_field,
+                message_type_field
             ],
-            spacing=8
+            spacing=8,
+            expand=True
         )
+
+    ###
 
     control_panel = ft.Container(
         content=ft.Row(
