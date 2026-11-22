@@ -38,6 +38,7 @@ def main(page: ft.Page) -> None:
         document_title = ft.Text(
             "New document",
             color=ft.Colors.ON_SURFACE_VARIANT,
+            margin=ft.Margin.only(top=12)
         )
 
         def on_message_name_change(inner_event: ft.Event[ft.TextField]) -> None:
@@ -97,6 +98,8 @@ def main(page: ft.Page) -> None:
                 message_type_field
             ],
             spacing=8,
+            margin=ft.Margin.symmetric(horizontal=12),
+            scroll=ft.ScrollMode.AUTO,
             expand=True
         )
 
@@ -118,9 +121,9 @@ def main(page: ft.Page) -> None:
                     ),
                     on_click=create_document
                 )
-            ]
+            ],
+            margin=12
         ),
-        padding=12,
         bgcolor=ft.Colors.SURFACE_CONTAINER,
         border_radius=8
     )
@@ -130,13 +133,14 @@ def main(page: ft.Page) -> None:
             controls=[
                 ft.Text(
                     "No open document",
-                    color=ft.Colors.ON_SURFACE_VARIANT
+                    color=ft.Colors.ON_SURFACE_VARIANT,
+                    margin=ft.Margin.only(top=12)
                 ),
                 ft.Divider()
             ],
-            spacing=8
+            spacing=8,
+            margin=ft.Margin.symmetric(horizontal=12)
         ),
-        padding=12,
         bgcolor=ft.Colors.SURFACE_CONTAINER,
         border_radius=8,
         expand=True
